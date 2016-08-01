@@ -1,0 +1,31 @@
+WebView疑难杂症两则
+
+1.自适应内容高度
+
+//设置内容，这里包装一层div，用来获取内容实际高度（像素），htmlcontent是html格式的字符串	
+  NSString * htmlcontent = [NSString stringWithFormat:@"<div id=\"webview_content_wrapper\">%@</div>", htmlcontent];
+  [_webView loadHTMLString:htmlcontent baseURL:nil];
+
+//delegate的方法重载//
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+  //获取页面高度（像素）
+  NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
+  float clientheight = [clientheight_str floatValue];
+  //设置到WebView上
+  webView.frame = CGRectMake(0, 0, self.view.frame.size.width, clientheight);
+  //获取WebView最佳尺寸（点）
+  CGSize frame = [webView sizeThatFits:webView.frame.size];
+  //获取内容实际高度（像素）
+  NSString * height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.getElementById('webview_content_wrapper').offsetHeight + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-top'))  + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-bottom'))"];
+  float height = [height_str floatValue];
+  //内容实际高度（像素）* 点和像素的比
+  height = height * frame.height / clientheight;
+  //再次设置WebView高度（点）
+  webView.frame = 。。。
+}
+
+2.去除webview底部黑线～
+
+    webView.opaque = NO;
+
+    webView.backgroundColor = [UIColor whiteColor];

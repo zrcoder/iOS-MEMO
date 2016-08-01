@@ -1,0 +1,2 @@
+AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+manager.requestSerializer.timeoutInterval = 300;

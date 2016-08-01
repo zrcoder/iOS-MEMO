@@ -1,0 +1,55 @@
+ UIImageView * action = (UIImageView *)[cell.contentView viewWithTag:10];
+
+    CALayer *transitionLayer = [[CALayer alloc] init];
+
+    [CATransaction begin];
+
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+
+    transitionLayer.opacity = 1.0;
+
+    transitionLayer.contents = action.layer.contents;
+
+    transitionLayer.frame = [self.view convertRect:action.bounds fromView:action];
+
+    [self.view.layer addSublayer:transitionLayer];
+
+    [CATransaction commit];   
+
+    //路径曲线
+
+    UIBezierPath *movePath = [UIBezierPath bezierPath];
+
+    [movePath moveToPoint:transitionLayer.position];//起点
+
+    CGPoint toPoint = CGPointMake(30, 568-64-30); //终点
+
+    [movePath addQuadCurveToPoint:toPoint  controlPoint:CGPointMake(26,transitionLayer.position.y-120)]; 
+
+    //关键帧
+
+    CAKeyframeAnimation *positionAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+
+    positionAnimation.path = movePath.CGPath;
+
+    positionAnimation.removedOnCompletion = YES;
+
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+
+    group.beginTime = CACurrentMediaTime();
+
+    group.duration = 0.7;
+
+    group.animations = [NSArray arrayWithObjects:positionAnimation,nil];
+
+    group.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+
+    group.delegate = self;
+
+    group.fillMode = kCAFillModeForwards;
+
+    group.removedOnCompletion = NO;
+
+    group.autoreverses= NO;
+
+    [transitionLayer addAnimation:group forKey:@"opacity"];

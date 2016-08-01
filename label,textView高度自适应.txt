@@ -1,0 +1,8 @@
+label,textView高度自适应
+
+CGFloat actualHeight = [label sizeThatFits:label.size].height;
+        CGRect frame = label.frame;
+        frame.size.height = actualHeight;
+        label.frame = frame;
+
+

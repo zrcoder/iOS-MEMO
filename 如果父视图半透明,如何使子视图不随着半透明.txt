@@ -1,0 +1,2 @@
+不用alpha，改用透明色即可
+superView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];

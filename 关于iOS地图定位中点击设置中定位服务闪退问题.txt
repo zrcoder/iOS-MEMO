@@ -1,0 +1,2 @@
+iOS8之后，如果应用中用到了地图定位，那么点击设置->隐私->定位服务 再点击该应用有时候会出现闪退问题，其原因是iOS8之后定位中添加了
+NSLocationWhenInUseDescription和NSLocationAlwaysUsageDescription，需要在plist文件中添加这两个或其中一个，出现闪退是因为在plist中把这两个值设成了Boolean类型的，将其改成NSString就不会闪退了

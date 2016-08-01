@@ -1,0 +1,23 @@
+//取得当前设备启动图的确切名称
+
+- (NSString *)launchImageName {
+    
+    NSString *name = nil;
+    
+    CGSize windowSize = [UIScreen mainScreen].bounds.size;    
+    NSArray* images = [[NSBundle mainBundle] infoDictionary][@"UILaunchImages"];
+    for (NSDictionary* info in images) {
+        CGSize imageSize = CGSizeFromString(info[@"UILaunchImageSize"]);
+        if ( CGSizeEqualToSize(imageSize, windowSize) ) {
+            name = info[@"UILaunchImageName"];
+            break;
+        }
+    }
+    
+    if (name == nil) {
+        name = @"LetGo";
+    }
+
+    return name;
+}
+

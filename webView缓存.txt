@@ -1,0 +1,4 @@
+NSString *stringUrl = …;
+NSURL *url = [NSURL URLWithString:stringUrl];
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:15];
+[webView loadRequest:request];
