@@ -1,0 +1,90 @@
+iOS系统功能调用
+
+1、调用 电话phone
+
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4008008288"]];
+ 
+
+2、调用自带 浏览器 safari
+
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.abt.com"]];
+ 
+
+3、调用 自带mail
+
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto://admin@abt.com"]];
+ 
+
+4、调用 SMS
+
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"sms://800888"]];
+ 
+
+5，跳转到系统设置相关界面
+
+1 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+其中，发短信，发Email的功能只能填写要发送的地址或号码，无法初始化发送内容，如果想实现内容的话，还需要更复杂一些，实现其各自的委托方法。
+
+若需要传递内容可以做如下操作：
+
+ 1 //加入：MessageUI.framework
+ 2  #import <MessageUI/MFMessageComposeViewController.h>
+ 3  
+ 4 //实现代理：MFMessageComposeViewControllerDelegate
+ 5 
+ 6  //调用sendSMS函数  
+ 7 //内容，收件人列表  
+ 8 - (void)sendSMS:(NSString *)bodyOfMessage recipientList:(NSArray *)recipients  
+ 9 {   
+11     MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];   
+13     if([MFMessageComposeViewController canSendText])   
+15     {   
+17         controller.body = bodyOfMessage;    
+19         controller.recipients = recipients;   
+21         controller.messageComposeDelegate = self;   
+23         [self presentModalViewController:controller animated:YES];  
+25     }      
+27 }  
+28    
+29 // 处理发送完的响应结果  
+30 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result  
+31 {  
+32   [self dismissModalViewControllerAnimated:YES];   
+34   if (result == MessageComposeResultCancelled)  
+35     NSLog(@"Message cancelled")  
+36   else if (result == MessageComposeResultSent)  
+37     NSLog(@"Message sent")    
+38   else   
+39     NSLog(@"Message failed")    
+40 }  
+发送邮件的为：  
+
+ 1 //导入MFMailComposeViewController
+ 2 #import <MessageUI/MFMailComposeViewController.h>  
+ 3 //实现代理：MFMailComposeViewControllerDelegate  
+ 4    
+ 5 //发送邮件  
+ 6 -(void)sendMail:(NSString *)subject content:(NSString *)content{  
+ 7   MFMailComposeViewController *controller = [[[MFMailComposeViewController alloc] init] autorelease];  
+ 9     if([MFMailComposeViewController canSendMail])   
+11     {   
+13         [controller setSubject:subject];    
+15         [controller setMessageBody:content isHTML:NO];    
+17         controller.mailComposeDelegate = self;   
+19         [self presentModalViewController:controller animated:YES];   
+21     }      
+22 }  
+23    
+24 //邮件完成处理  
+25 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{  
+27     [self dismissModalViewControllerAnimated:YES];   
+29     if (result == MessageComposeResultCancelled)  
+30         NSLog(@"Message cancelled");  
+31     else if (result == MessageComposeResultSent)  
+32         NSLog(@"Message sent");   
+33     else   
+34         NSLog(@"Message failed");    
+35    
+36 }  
+37    
+默认发送短信的界面为英文的，解决办法为：在.xib 中的Localization添加一組chinese   
