@@ -1,0 +1,26 @@
+//scrollView(tableView)上下滑动渐变显示导航栏
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	CGFloat offsetY = scrollView.contentOffset.y;
+
+        CGFloat criticalHeight = 60
+
+        UIColor * naveColor =...;
+
+        CGFloat alpha = MIN(1, 1 - ((criticalHeight + 64 - offsetY) / 64));
+
+        if (offsetY > criticalHeight) {
+
+            self.navBar.backgroundColor = [naveColor colorWithAlphaComponent:alpha];
+
+            …...
+
+        } else {
+
+            self.navBar.backgroundColor = [naveColor colorWithAlphaComponent:0];
+
+            …...
+
+        }
+
+}
