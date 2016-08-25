@@ -3,24 +3,12 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	CGFloat offsetY = scrollView.contentOffset.y;
 
-        CGFloat criticalHeight = 60
+        CGFloat criticalHeight = 75
 
         UIColor * naveColor =...;
 
-        CGFloat alpha = MIN(1, 1 - ((criticalHeight + 64 - offsetY) / 64));
+        CGFloat alpha = offsetY / criticalHeight));
 
-        if (offsetY > criticalHeight) {
-
-            self.navBar.backgroundColor = [naveColor colorWithAlphaComponent:alpha];
-
-            …...
-
-        } else {
-
-            self.navBar.backgroundColor = [naveColor colorWithAlphaComponent:0];
-
-            …...
-
-        }
+        self.navBar.backgroundColor = [naveColor colorWithAlphaComponent:alpha];
 
 }
