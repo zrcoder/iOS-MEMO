@@ -1,0 +1,3 @@
+在xib或者storyBoard里添加单击手势识别者导致奔溃，目前是自定义tableViewCell遇到
+解决：
+用代码添加手势识别者。
