@@ -20,6 +20,7 @@
 * [WebView疑难杂症两则](#16)
 * [xib自定义view初始化](#17)
 * [IB里添加手势奔溃](#18)
+* [点击webView跳转到safari](19)
 
 ## <a id="1"></a>AFN在路径里含有中文或空格时的错误及解决
 ```
@@ -493,4 +494,19 @@ xib自定义view2初始化＋IBInspectable
 在xib或者storyBoard里添加单击手势识别者导致奔溃，目前是自定义tableViewCell遇到
 解决：
 用代码添加手势识别者。
+```
+## <a id="19"></a>点击webView跳转到safari
+```
+某个页面里嵌入了webview，本来只是用来展示静态html内容，但有一天市场部的需要里边有链接。点击链接后去那里？安卓会用本地浏览器打开，所以产品经理说iOS也该用safari打开。
+奇葩需求，不过实现倒是不难。在代理方法里拦截url即可。
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    // 若用户点击了链接，用safari打开
+    NSString *url = request.URL.absoluteString;
+    if ([url isEqualToString:@"about:blank"]) { return YES; }
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+    return NO;
+}
+注意，一开始就是加载的静态html文本，所以url是"about:blank"，这个放行，让这些内容加载显示。
+当用户点击了某个链接后，会再次来到这个方法，拦截url，跳转到safari打开即可。
 ```
