@@ -22,7 +22,7 @@
 * [IB里添加手势奔溃](#18)
 * [点击webView跳转到safari](#19)
 
-## <a id="1"></a>AFN在路径里含有中文或空格时的错误及解决
+ <a id="1"></a>AFN在路径里含有中文或空格时的错误及解决
 ```
 Assertion failure in -[AFHTTPRequestSerializer requestWithMethod:URLString:parameters:error:]
 
