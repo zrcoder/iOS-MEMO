@@ -1,7 +1,0 @@
-在tableview的- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath这个代理里面实现:
-static CGFloat initialDelay = 0.2f;
-            static CGFloat stutter = 0.06f;
-            cell.contentView.transform =  CGAffineTransformMakeTranslation(kFBaseWidth, 0);
-            [UIView animateWithDuration:1. delay:initialDelay + ((indexPath.row) * stutter) usingSpringWithDamping:0.6 initialSpringVelocity:0 options:0 animations:^{
-                cell.contentView.transform = CGAffineTransformIdentity;
-            } completion:NULL];

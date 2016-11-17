@@ -1,9 +1,0 @@
-为了避免服务器奔溃，上传时转成Unicode编码
-NSData *data = [emojiString dataUsingEncoding:NSNonLossyASCIIStringEncoding];
-NSString *valueUnicode = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
-从服务器获取后逆向来一遍
-NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-NSString *valueEmoj = [[NSString alloc] initWithData:data encoding:NSNonLossyASCIIStringEncoding];
-
-以上方式在iOS手机间可以正常运作，但是无法和安卓统一~（处理机制不一样）——可以用GitHub上的一个库NSString＋Emojize，表情不全，勉强可用.

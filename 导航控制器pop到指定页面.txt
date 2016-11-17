@@ -1,2 +1,0 @@
-NSInteger index = 1;
-[self.navigationController popToViewController:self.navigationController.viewControllers[index] animated:YES];
