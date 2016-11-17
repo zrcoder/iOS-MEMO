@@ -2,31 +2,47 @@
 随记：遇到的iOS小问题及解决办法
 
 ## 目录
-* [AFN在路径里含有中文或空格时的错误及解决](#AFN在路径里含有中文或空格时的错误及解决)
+* [AFN在路径里含有中文或空格时的错误及解决](#1)
+* [AFN超时设置](#2)
+* [导航控制器pop到指定页面](#3)
+* [关于iOS地图定位中点击设置中定位服务闪退问题](#4)
+* [加入购物车红点贝塞尔曲线动画效果](#5)
+* [](#6)
+* [](#7)
+* [](#8)
+* [](#9)
+* [](#10)
+* [](#11)
+* [](#12)
+* [](#13)
+* [](#14)
+* [](#15)
+* [](#16)
+* [](#17)
 
-### <a id="AFN在路径里含有中文或空格时的错误及解决"></a>AFN在路径里含有中文或空格时的错误及解决
+## <a id="1"></a>AFN在路径里含有中文或空格时的错误及解决
 ```
 Assertion failure in -[AFHTTPRequestSerializer requestWithMethod:URLString:parameters:error:]
 
 path = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 ```
-[TOC]AFN超时设置
+## <a id="2"></a>AFN超时设置
 ```
 AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 manager.requestSerializer.timeoutInterval = 300;
 ```
-[TOC]导航控制器pop到指定页面
+## <a id="3"></a>导航控制器pop到指定页面
 ```
 NSInteger index = 1;
 UIViewController *destVC = self.navigationController.viewControllers[index];
 [self.navigationController popToViewController:destVC animated:YES];
 ```
-[TOC]关于iOS地图定位中点击设置中定位服务闪退问题
+## <a id="4"></a>关于iOS地图定位中点击设置中定位服务闪退问题
 ```
 iOS8之后，如果应用中用到了地图定位，那么点击设置->隐私->定位服务 再点击该应用有时候会出现闪退问题，其原因是iOS8之后定位中添加了
 NSLocationWhenInUseDescription和NSLocationAlwaysUsageDescription，需要在plist文件中添加这两个或其中一个，出现闪退是因为在plist中把这两个值设成了Boolean类型的，将其改成NSString就不会闪退了.
 ```
-加入购物车红点贝塞尔曲线动画效果
+## <a id="5"></a>加入购物车红点贝塞尔曲线动画效果
 ```
  UIImageView * action = (UIImageView *)[cell.contentView viewWithTag:10];
 
@@ -84,7 +100,7 @@ NSLocationWhenInUseDescription和NSLocationAlwaysUsageDescription，需要在pli
 
     [transitionLayer addAnimation:group forKey:@"opacity"];
 ```
-取得当前设备启动图的确切名称
+## <a id=""></a>取得当前设备启动图的确切名称
 ```
 //取得当前设备启动图的确切名称
 
@@ -110,20 +126,20 @@ NSLocationWhenInUseDescription和NSLocationAlwaysUsageDescription，需要在pli
 }
 
 ```
-取消tableviewheader悬停
+## <a id=""></a>取消tableviewheader悬停
 ```
 改tableviewStlye为group类型，当然之后调整下显示。
 ```
-如果父视图半透明,如何使子视图不随着半透明
+## <a id=""></a>如果父视图半透明,如何使子视图不随着半透明
 ```
 不用alpha，改用透明色即可
 superView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
 ```
-状态栏里的ActivityIndicator
+## <a id=""></a>状态栏里的ActivityIndicator
 ```
 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 ```
-cell的动态进入效果
+## <a id=""></a>cell的动态进入效果
 ```
 在tableview的- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath这个代理里面实现:
 static CGFloat initialDelay = 0.2f;
@@ -133,7 +149,7 @@ cell.contentView.transform =  CGAffineTransformMakeTranslation(kFBaseWidth, 0);
                 cell.contentView.transform = CGAffineTransformIdentity;
             } completion:NULL];
 ```
-Emoji表情上传与下载后显示转换
+## <a id=""></a>Emoji表情上传与下载后显示转换
 ```
 为了避免服务器奔溃，上传时转成Unicode编码
 NSData *data = [emojiString dataUsingEncoding:NSNonLossyASCIIStringEncoding];
@@ -145,7 +161,7 @@ NSString *valueEmoj = [[NSString alloc] initWithData:data encoding:NSNonLossyASC
 
 以上方式在iOS手机间可以正常运作，但是无法和安卓统一~（处理机制不一样）——可以用GitHub上的一个库NSString＋Emojize，表情不全，勉强可用.
 ```
-iOS系统功能调用
+## <a id=""></a>iOS系统功能调用
 ```
 1、调用 电话phone
 
@@ -236,7 +252,7 @@ iOS系统功能调用
 37    
 默认发送短信的界面为英文的，解决办法为：在.xib 中的Localization添加一組chinese   
 ```
-NSDictinary,NSArray,JSonString,NSData转换
+## <a id=""></a>NSDictinary,NSArray,JSonString,NSData转换
 ```
 //字典、数组、JSonString - NSData
         
@@ -265,7 +281,7 @@ int main(int argc, const char * argv[]) {
 }
 
 ```
-scrollView(tableView)上下滑动渐变显示导航栏
+## <a id=""></a>scrollView(tableView)上下滑动渐变显示导航栏
 ```
 //scrollView(tableView)上下滑动渐变显示导航栏
 
@@ -282,14 +298,14 @@ scrollView(tableView)上下滑动渐变显示导航栏
 
 }
 ```
-webView缓存策略
+## <a id=""></a>webView缓存策略
 ```
 NSString *stringUrl = …;
 NSURL *url = [NSURL URLWithString:stringUrl];
 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:15];
 [webView loadRequest:request];
 ```
-WebView疑难杂症两则
+## <a id=""></a>WebView疑难杂症两则
 ```
 1.自适应内容高度
 
@@ -322,7 +338,7 @@ WebView疑难杂症两则
     webView.backgroundColor = [UIColor whiteColor];
 
 ```
-xib自定义view初始化1
+## <a id=""></a>xib自定义view初始化1
 ```
 #import <UIKit/UIKit.h>
 
@@ -471,7 +487,7 @@ xib自定义view2初始化＋IBInspectable
 }
 @end
 ```
-IB里添加手势奔溃
+## <a id=""></a>IB里添加手势奔溃
 ```
 在xib或者storyBoard里添加单击手势识别者导致奔溃，目前是自定义tableViewCell遇到
 解决：
