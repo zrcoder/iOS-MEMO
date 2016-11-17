@@ -7,18 +7,19 @@
 * [导航控制器pop到指定页面](#3)
 * [关于iOS地图定位中点击设置中定位服务闪退问题](#4)
 * [加入购物车红点贝塞尔曲线动画效果](#5)
-* [](#6)
-* [](#7)
-* [](#8)
-* [](#9)
-* [](#10)
-* [](#11)
-* [](#12)
-* [](#13)
-* [](#14)
-* [](#15)
-* [](#16)
-* [](#17)
+* [取得当前设备启动图的确切名称](#6)
+* [取消tableviewheader悬停](#7)
+* [如果父视图半透明,如何使子视图不随着半透明](#8)
+* [状态栏里的ActivityIndicator](#9)
+* [cell的动态进入效果](#10)
+* [Emoji表情上传与下载后显示转换](#11)
+* [iOS系统功能调用](#12)
+* [NSDictinary,NSArray,JSonString,NSData转换](#13)
+* [scrollView(tableView)上下滑动渐变显示导航栏](#14)
+* [webView缓存策略](#15)
+* [WebView疑难杂症两则](#16)
+* [xib自定义view初始化](#17)
+* [IB里添加手势奔溃](#18)
 
 ## <a id="1"></a>AFN在路径里含有中文或空格时的错误及解决
 ```
@@ -100,7 +101,7 @@ NSLocationWhenInUseDescription和NSLocationAlwaysUsageDescription，需要在pli
 
     [transitionLayer addAnimation:group forKey:@"opacity"];
 ```
-## <a id=""></a>取得当前设备启动图的确切名称
+## <a id="6"></a>取得当前设备启动图的确切名称
 ```
 //取得当前设备启动图的确切名称
 
@@ -126,20 +127,20 @@ NSLocationWhenInUseDescription和NSLocationAlwaysUsageDescription，需要在pli
 }
 
 ```
-## <a id=""></a>取消tableviewheader悬停
+## <a id="7"></a>取消tableviewheader悬停
 ```
 改tableviewStlye为group类型，当然之后调整下显示。
 ```
-## <a id=""></a>如果父视图半透明,如何使子视图不随着半透明
+## <a id="8"></a>如果父视图半透明,如何使子视图不随着半透明
 ```
 不用alpha，改用透明色即可
 superView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
 ```
-## <a id=""></a>状态栏里的ActivityIndicator
+## <a id="9"></a>状态栏里的ActivityIndicator
 ```
 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 ```
-## <a id=""></a>cell的动态进入效果
+## <a id="10"></a>cell的动态进入效果
 ```
 在tableview的- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath这个代理里面实现:
 static CGFloat initialDelay = 0.2f;
@@ -149,7 +150,7 @@ cell.contentView.transform =  CGAffineTransformMakeTranslation(kFBaseWidth, 0);
                 cell.contentView.transform = CGAffineTransformIdentity;
             } completion:NULL];
 ```
-## <a id=""></a>Emoji表情上传与下载后显示转换
+## <a id="11"></a>Emoji表情上传与下载后显示转换
 ```
 为了避免服务器奔溃，上传时转成Unicode编码
 NSData *data = [emojiString dataUsingEncoding:NSNonLossyASCIIStringEncoding];
@@ -161,7 +162,7 @@ NSString *valueEmoj = [[NSString alloc] initWithData:data encoding:NSNonLossyASC
 
 以上方式在iOS手机间可以正常运作，但是无法和安卓统一~（处理机制不一样）——可以用GitHub上的一个库NSString＋Emojize，表情不全，勉强可用.
 ```
-## <a id=""></a>iOS系统功能调用
+## <a id="12"></a>iOS系统功能调用
 ```
 1、调用 电话phone
 
@@ -252,7 +253,7 @@ NSString *valueEmoj = [[NSString alloc] initWithData:data encoding:NSNonLossyASC
 37    
 默认发送短信的界面为英文的，解决办法为：在.xib 中的Localization添加一組chinese   
 ```
-## <a id=""></a>NSDictinary,NSArray,JSonString,NSData转换
+## <a id="13"></a>NSDictinary,NSArray,JSonString,NSData转换
 ```
 //字典、数组、JSonString - NSData
         
@@ -281,7 +282,7 @@ int main(int argc, const char * argv[]) {
 }
 
 ```
-## <a id=""></a>scrollView(tableView)上下滑动渐变显示导航栏
+## <a id="14"></a>scrollView(tableView)上下滑动渐变显示导航栏
 ```
 //scrollView(tableView)上下滑动渐变显示导航栏
 
@@ -298,14 +299,14 @@ int main(int argc, const char * argv[]) {
 
 }
 ```
-## <a id=""></a>webView缓存策略
+## <a id="15"></a>webView缓存策略
 ```
 NSString *stringUrl = …;
 NSURL *url = [NSURL URLWithString:stringUrl];
 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:15];
 [webView loadRequest:request];
 ```
-## <a id=""></a>WebView疑难杂症两则
+## <a id="16"></a>WebView疑难杂症两则
 ```
 1.自适应内容高度
 
@@ -338,7 +339,7 @@ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePoli
     webView.backgroundColor = [UIColor whiteColor];
 
 ```
-## <a id=""></a>xib自定义view初始化1
+## <a id="17"></a>xib自定义view初始化
 ```
 #import <UIKit/UIKit.h>
 
@@ -487,7 +488,7 @@ xib自定义view2初始化＋IBInspectable
 }
 @end
 ```
-## <a id=""></a>IB里添加手势奔溃
+## <a id="18"></a>IB里添加手势奔溃
 ```
 在xib或者storyBoard里添加单击手势识别者导致奔溃，目前是自定义tableViewCell遇到
 解决：
