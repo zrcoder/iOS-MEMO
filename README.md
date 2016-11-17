@@ -1,7 +1,10 @@
 # iOS-MEMO
 随记：遇到的iOS小问题及解决办法
 
-[TOC]AFN在路径里含有中文或空格时的错误及解决[TOC]
+## 目录
+* [AFN在路径里含有中文或空格时的错误及解决](#AFN在路径里含有中文或空格时的错误及解决)
+
+## <a id="AFN在路径里含有中文或空格时的错误及解决"></a>AFN在路径里含有中文或空格时的错误及解决
 ```
 Assertion failure in -[AFHTTPRequestSerializer requestWithMethod:URLString:parameters:error:]
 
